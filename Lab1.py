@@ -6,9 +6,8 @@ Date: 1/29/2024
 
 """
 
-#declare variable
+#create variable
 message = "Go Gators!"
 
 #print message
 print(message)
-
