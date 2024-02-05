@@ -3,7 +3,7 @@ import pytest
 from array import Array
 
 @pytest.mark.arraytest1
-def test_init_array_len(len=5):
+def test_init_array_len(len=0):
     a = Array(len)
     assert (a.length() == 0 and a.values() == [])
 

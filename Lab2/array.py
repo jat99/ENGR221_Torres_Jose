@@ -6,9 +6,15 @@ Description: Implementation of an unsorted array with duplicates
 
 class Array():
     # Constructor
-    def __init__(self, initialSize):
-        self.__a = [None] * initialSize # The array stored as a list
-        self.__length = 0               # Start with no values in the list
+    def __init__(self, initialSizeOrElements):
+        if type(initialSizeOrElements) == int:
+            self.__a = [None] * initialSizeOrElements # The array stored as a list
+            self.__length = initialSizeOrElements  # Start with no values in the list
+            self.__maxLength = initialSizeOrElements
+        else: 
+            self.__a = initialSizeOrElements
+            self.__length = len(initialSizeOrElements)
+            self.__maxLength = self.__length
 
     ########
     # Methods
@@ -35,26 +41,27 @@ class Array():
     
     # Insert value to the end of the array
     def insert(self, value):
-        self.__a[self.__length] = value
+        if self.__maxLength <= self.__length:
+            self.__a += [None] * 2
+            self.__maxLength = len(self.__a)
 
-        # Increment the length
-        self.__length += 1   
+        self.__a[self.__length] = value
+        self.__length += 1
+           
+    
 
     # Return the index of value in the array, 
     # or -1 if value is not in the array
     def search(self, value):
-
         # Only search the indices we've inserted
+        indexes = []
         for idx in range(self.__length): 
 
             # Check the value at the current index 
             if self.__a[idx] == value:  
-
-                # Return the index  
-                return idx  
-            
-        # Return -1 if value was not found             
-        return -1                        
+                indexes.append(idx)
+                # Return the index               
+        return indexes                        
 
     # Delete the first occurrence of value in the array
     # Returns True if value was deleted, False otherwise
@@ -63,20 +70,21 @@ class Array():
         idx = self.search(value)
         
         # If the value was found
-        if idx != -1: 
-
+        for i in range(len(idx)):    
+            if i != 0:
+                idx[i] = idx[i] - 1
             # Decrement the array length
             self.__length -= 1
 
             # Shift all the remaining values 
-            for j in range(idx, self.__length):
-                self.__a[j] = self.__a[k+1]
+            for j in range(idx[i], self.__length):
+                self.__a[j] = self.__a[j+1]
 
-            # Return that value was deleted
-            return True
+            if i == len(idx) - 1:
+                self.__a = self.__a[0:self.__length]
         
-        # Return False if the value was not found
-        return False
+        print(self.__a)
+        print(self.__length)
     
     # Print all items in the list
     def traverse(self):
@@ -84,4 +92,5 @@ class Array():
             print(self.__a[i])
 
 if __name__ == '__main__':
+    print("Jose Torres")
     pass
