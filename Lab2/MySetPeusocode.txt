@@ -1,0 +1,7 @@
+Class MySet
+Constructor:
+    Input:
+    
+Attributes:
+
+Methods:

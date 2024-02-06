@@ -82,10 +82,7 @@ class Array():
 
             if i == len(idx) - 1:
                 self.__a = self.__a[0:self.__length]
-        
-        print(self.__a)
-        print(self.__length)
-    
+   
     # Print all items in the list
     def traverse(self):
         for i in range(self.__length):
