@@ -1,7 +1,40 @@
-Class MySet
+Name: Jose Torres
+Filename: MySetPuesocode.txt
+Date 02/06/2023
+
+
+Class MySet 
 Constructor:
-    Input:
-    
+    Input: List of Values
+    Initializer: Use a dictionary to store values as keys for O(1) retrieval
+
 Attributes:
+    size, values, max_size
 
 Methods:
+    search, add, remove, traverse, isSet
+
+    Search: 
+        1. Check if set is empty
+        2. Loop the length of the set
+        3. if you encounter a match, then return True 
+        4. if loop terminates and not match was found return False
+    Insertion: The value can be inserted at any postion since order does not matter.
+        1. Check if value is in set already, continue if it is not
+        2. Check if there is enough space in current array
+        3. If not enough space then update set, max length
+        4. update length and insert new value into set
+    Deletion: When deleting you need to update the set, length and potentially max length.
+    I think swapping will work here because order does not matter and it will only be one operation and won't have to shift.
+        1. Check if set is empty, this will end the function
+        2. Loop the length of the set
+        3. swap the value at the last index with matched index
+        4. decrement lenght and convert last index to None
+        5. This will leave extra space in array for future insertions
+        6. Add code that will remove [None] if the array becomes large
+    isEmpty:
+        1. Return the length of the set
+    traverse   
+        1. Check if array is empty, if empty print empty
+        2. if not empty then loop the set, up to the length attribute
+

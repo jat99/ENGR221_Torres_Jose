@@ -1,33 +1,81 @@
+"""
+Name: Jose Torres
+Filename: myset.py
+Date: 02/06/2023
+
+"""
 
 class MySet:
 
     def __init__(self, values):
-        self.set = { }
+        self.set = []
+        self.length = 0
+        self.max_length = 0
         for i in range(len(values)):
-            self.set[values[i]] = True
-
+            self.insert(values[i])
+                
     def search(self, value):
-        try: 
-            return self.set[value]
-        except:
-            return False
+        for i in range(self.length):
+            if value == self.set[i]:
+                return True
+        return False
+    
+    def search_temp(self, value, values):
+        tempSet = values
+        for j in range(len(tempSet)):
+            if value == tempSet[j]:
+                return True
+        return False
     
     def insert(self, value):
-       if (self.search(value) == False):
-            self.set[value] = True
-    
-    def delete(self, value):
-        if self.search(value):
-            del self.set[value]
+        if self.search(value) == False:
+            if self.length >= self.max_length:
+                self.set += [None] * 5
+                self.max_length = len(self.set)
+            self.set[self.length] = value
+            self.length += 1
 
     def traverse(self):
-        for i in self.set.keys():
-            print(i)
+       if self.isEmpty():
+            print("Set is Empty!")
+       else: 
+            for i in range(self.length):
+                print(self.set[i], end =" ")
 
+    def delete(self, value):
+        if self.isEmpty():
+            print("Nothing to delete, set is empty!")
+        else: 
+            for i in range(self.length):
+                if value == self.set[i]:
+                    self.swap(i)
+                    return
+
+    def swap(self, i):
+        self.set[i] = self.set[self.length - 1]
+        self.set[self.length - 1] = None
+        self.length -= 1
+
+    def isSet(self,values):
+        temp_set = []
+        for i in range(len(values)):
+            if self.search_temp(values[i],temp_set) == True:
+                return False
+            temp_set.append(values[i])
+        return True
+
+    def isEmpty(self):
+        if self.length > 0:
+            return False
+        return True
+    
 if __name__ == '__main__':
-    mySet = MySet([1,2,3,5,5])
-    mySet.insert(6)
-    mySet.delete(2)
-    print(mySet.set)
+    mySet = MySet([1,2,3,3,4,4,5,6])
     mySet.traverse()
+    mySet.insert(7)
+    mySet.delete(5)
+    print("\n")
+    mySet.traverse()
+    print("\n")
+    print(mySet.search(5))
     pass

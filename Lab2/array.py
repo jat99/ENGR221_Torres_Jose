@@ -9,12 +9,12 @@ class Array():
     def __init__(self, initialSizeOrElements):
         if type(initialSizeOrElements) == int:
             self.__a = [None] * initialSizeOrElements # The array stored as a list
-            self.__length = initialSizeOrElements  # Start with no values in the list
-            self.__maxLength = initialSizeOrElements
+            self.__length = initialSizeOrElements  # Start with given number of values
+            self.__maxLength = initialSizeOrElements # Start with given number of values
         else: 
-            self.__a = initialSizeOrElements
-            self.__length = len(initialSizeOrElements)
-            self.__maxLength = self.__length
+            self.__a = initialSizeOrElements # Set a equal to list that is passed in
+            self.__length = len(initialSizeOrElements) # Set length equal to the size of the list passed in
+            self.__maxLength = self.__length # Set maxLength eqaul to length
 
     ########
     # Methods
@@ -41,12 +41,12 @@ class Array():
     
     # Insert value to the end of the array
     def insert(self, value):
-        if self.__maxLength <= self.__length:
-            self.__a += [None] * 2
-            self.__maxLength = len(self.__a)
+        if self.__maxLength <= self.__length: # Check if there is enough space in array
+            self.__a += [None] * 2 # Increase size of array by two (Can be any value)
+            self.__maxLength = len(self.__a) # Update max length
 
-        self.__a[self.__length] = value
-        self.__length += 1
+        self.__a[self.__length] = value #insert the value at the current size of length
+        self.__length += 1 #increment the length by 1
            
     
 
@@ -54,24 +54,22 @@ class Array():
     # or -1 if value is not in the array
     def search(self, value):
         # Only search the indices we've inserted
-        indexes = []
+        indexes = [] # Start with empty array to collect all indexes of duplicates
         for idx in range(self.__length): 
-
             # Check the value at the current index 
             if self.__a[idx] == value:  
-                indexes.append(idx)
-                # Return the index               
-        return indexes                        
+                indexes.append(idx) # if values match then add index to array   
+        return indexes  # Return the indexes                   
 
     # Delete the first occurrence of value in the array
     # Returns True if value was deleted, False otherwise
     def delete(self, value):
         # Find the index of the value to delete
-        idx = self.search(value)
+        idx = self.search(value) # Get array of indexes that are duplicates
         
-        # If the value was found
+        # Loop through array of indexes
         for i in range(len(idx)):    
-            if i != 0:
+            if i != 0: # decrement the index by one after the first index because array will be shifted
                 idx[i] = idx[i] - 1
             # Decrement the array length
             self.__length -= 1
@@ -79,7 +77,7 @@ class Array():
             # Shift all the remaining values 
             for j in range(idx[i], self.__length):
                 self.__a[j] = self.__a[j+1]
-
+            # if the array is done looping then recreate the array to remove the excess values
             if i == len(idx) - 1:
                 self.__a = self.__a[0:self.__length]
    
