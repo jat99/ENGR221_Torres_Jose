@@ -13,6 +13,12 @@ class MySet:
         self.max_length = 0
         for i in range(len(values)):
             self.insert(values[i])
+    
+    def size(self):
+        return self.length
+    
+    def vals(self):
+        return self.set
                 
     def search(self, value):
         for i in range(self.length):
@@ -30,7 +36,7 @@ class MySet:
     def insert(self, value):
         if self.search(value) == False:
             if self.length >= self.max_length:
-                self.set += [None] * 5
+                self.set += [None] * 1
                 self.max_length = len(self.set)
             self.set[self.length] = value
             self.length += 1
@@ -40,7 +46,7 @@ class MySet:
             print("Set is Empty!")
        else: 
             for i in range(self.length):
-                print(self.set[i], end =" ")
+                print(self.set[i])
 
     def delete(self, value):
         if self.isEmpty():
@@ -53,7 +59,7 @@ class MySet:
 
     def swap(self, i):
         self.set[i] = self.set[self.length - 1]
-        self.set[self.length - 1] = None
+        self.set = self.set[0:self.length]
         self.length -= 1
 
     def isSet(self,values):
@@ -70,12 +76,4 @@ class MySet:
         return True
     
 if __name__ == '__main__':
-    mySet = MySet([1,2,3,3,4,4,5,6])
-    mySet.traverse()
-    mySet.insert(7)
-    mySet.delete(5)
-    print("\n")
-    mySet.traverse()
-    print("\n")
-    print(mySet.search(5))
     pass
