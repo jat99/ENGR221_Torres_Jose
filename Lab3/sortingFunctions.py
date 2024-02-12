@@ -6,14 +6,27 @@ Description: Implementation of sorting algorithms.
 import time, random
 
 # Implementation of insertionSort algorithm
-def insertionSort(list_to_sort:list) -> list:
-    ### Add your insertionSort implementation here
+def insertionSort(list_to_sort: list) -> list:
+    for index in range(len(list_to_sort)):
+        j = index
+        while j > 0 and list_to_sort[j-1] > list_to_sort[j]:
+            swap(list_to_sort, j, j-1)
+            j = j - 1
     return list_to_sort
 
 # Implementation of bubbleSort algorithm
 def bubbleSort(list_to_sort:list) -> list:
     ### Add your bubbleSort implementation here
+    for i in range(len(list_to_sort) - 1):
+        for j in range(len(list_to_sort) - 1 - i):
+            if list_to_sort[j] > list_to_sort[j + 1]:
+                swap(list_to_sort,j, j+1)
     return list_to_sort
+
+def swap(a,j,i):
+    temp = a[j]
+    a[j] = a[i]
+    a[i] = temp
 
 # Returns a random list of the given length
 def createRandomList(length:int) -> list:

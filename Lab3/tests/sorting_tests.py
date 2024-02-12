@@ -11,12 +11,15 @@ def array_to_sort(num_items=20):
 # Tests that the array is sorted using insertion sort
 @pytest.mark.insertion_sort
 def test_insertion_sort(array_to_sort):
+    print(array_to_sort)
     # Sort the array with insertionSort
     my_sorted_array = insertionSort(array_to_sort)
+    print(my_sorted_array)
     # Create a copy of the original array to sort
     sorted_array = array_to_sort[:]
     # Sort the copy
     sorted_array.sort()
+    print(sorted_array)
     # Check that insertionSort's output is sorted
     assert my_sorted_array == sorted_array
 
