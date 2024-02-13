@@ -49,4 +49,5 @@ def getRuntime(function_to_run, list_length) -> float:
 
 
 if __name__ == '__main__':
+    print(getRuntime(bubbleSort, 10000))
     pass
