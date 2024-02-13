@@ -1,5 +1,6 @@
 """
-sortingFunctions.py
+Name: Jose Torres
+File Name: sortingFunctions.py
 Description: Implementation of sorting algorithms.
 """
 
