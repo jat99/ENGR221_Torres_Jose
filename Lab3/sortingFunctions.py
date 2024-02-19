@@ -40,6 +40,71 @@ def swap(a,j,i):
     a[j] = a[i]
     a[i] = temp
 
+def merge(left_array: list, right_array: list):
+    array = []
+    i = 0
+    j = 0
+
+    L = len(left_array)
+    R = len(right_array)
+
+    while (i < L and j < R):
+        if left_array[i] <= right_array[j]:
+            array.append(left_array[i])
+            i+=1
+        else:
+            array.append(right_array[j])
+            j+=1
+
+    while (i < L):
+        array.append(left_array[i])
+        i+=1
+    
+    while (j < R):
+        array.append(right_array[j])
+        j+=1
+  
+    return array
+
+
+def mergeSort(array: list):
+    if len(array) < 2:
+        return array
+
+    left_array = array[:len(array)//2]
+    right_array = array[len(array)//2:]
+    #mergeSortLeft
+    left_array = mergeSort(left_array)
+    #mergeSortRight
+    right_array = mergeSort(right_array)
+
+    return merge(left_array,right_array)
+    #mergeBothArray
+
+def partition(A: list, start, end):
+    pivot = A[end]
+    pIndex = 0
+
+    for index in range(end):
+        if A[index] <= pivot:
+            A[index], A[pIndex] = A[pIndex], A[index]
+            pIndex+=1
+    
+    A[pIndex], A[end] = A[end], A[pIndex]
+
+    return pIndex
+
+def quickSort(A, start, end):
+    if start >= end:
+        return A
+
+    index = partition(A, start, end)
+
+    quickSort(A, start, index - 1)
+    quickSort(A, index + 1, end)
+
+    return A
+  
 # Returns a random list of the given length
 def createRandomList(length:int) -> list:
     return random.sample(range(max(100, length)), length)
@@ -58,8 +123,8 @@ def getRuntime(function_to_run, list_length) -> float:
     # Return the difference
     return end_time - start_time
 
-
 if __name__ == '__main__':
-   a = insertionSort_1([8,4,1,2])
-   print(a)
+   A = [2,1,7,9,4]
+   print(A)
+
 pass
