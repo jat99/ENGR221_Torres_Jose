@@ -97,7 +97,7 @@ def partition(A: list, start, end):
 def quickSort(A, start, end):
     if start >= end:
         return A
-
+   
     index = partition(A, start, end)
 
     quickSort(A, start, index - 1)
@@ -123,8 +123,13 @@ def getRuntime(function_to_run, list_length) -> float:
     # Return the difference
     return end_time - start_time
 
-if __name__ == '__main__':
-   A = [2,1,7,9,4]
-   print(A)
+def test(A):
+    A = []
+    print("in test: ", A)
 
+if __name__ == '__main__':
+    A = [2,1,7,9,4]
+    print(A)
+    test(A)
+    print(A)
 pass
