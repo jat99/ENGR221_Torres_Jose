@@ -14,22 +14,13 @@ class MazeSolver:
         self.ss = searchStructure()  # Initialize a searchStructure object
 
     def tileIsVisitable(self, row:int, col:int) -> bool:
-        #check if out of bounds,
-        if row >= self.maze.num_rows or row < 0:
-            #print("out of range")
-            return False
-        elif col >= self.maze.num_cols or col < 0:
-           # print("out of range")
-            return False
-        elif self.maze.contents[row][col].visited() == True:
-            #print("already visited")
-            return False
-        elif self.maze.contents[row][col].isWall() == True:
-            #print("is wall")
-            return False
-        else: 
-            #print("can visit")
-            return True
+        #check if out of bounds
+        if row >= self.maze.num_rows or row < 0:    return False
+        if col >= self.maze.num_cols or col < 0:    return False
+        if self.maze.contents[row][col].visited():  return False
+        if self.maze.contents[row][col].isWall():   return False
+   
+        return True
 
     def solve(self):
         #add starting point to stack
