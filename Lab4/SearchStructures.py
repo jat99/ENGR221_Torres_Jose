@@ -11,25 +11,22 @@ class Stack():
     # Returns True if the Stack is empty, or False if it is not empty
     def isEmpty(self):
         return  self.__length == 0
-
-    def values(self):
-        print(" ")
-        for i in range(self.__length):
-            print(self.__items[i].getRow(), self.__items[i].getCol())
+    
     # For a Stack, this should "push" item to the top of the Stack
     def add(self, item):
-        self.__items += [item]
+        self.__items += [item] #insert to end of array
         self.__length += 1
     
-    def current(self):
+    def current(self): #return most recent pushed element
         return self.__items[self.__length - 1]
 
     # For a Stack, this should "pop" an item from the Stack
     # and return it
     def remove(self):
+        #store value to be removed
         value = self.__items[self.__length - 1]
-        self.__length -= 1
-        self.__items = self.__items[0:self.__length]
+        self.__length -= 1 #decrement the length
+        self.__items = self.__items[0:self.__length] #create array with new updated length
         return value
     
 # Implementation of a Queue
@@ -43,22 +40,19 @@ class Queue():
         return self.__length == 0
 
     def current(self):
-        return self.__items[0]
+        return self.__items[0] #return first element in array
 
     # For a Queue, this should "enqueue" item to the end of the Queue
     def add(self, item):
-        self.__items += [item]
+        self.__items += [item] #Same as stack, add to end of array
         self.__length += 1
-
-    def value(self):
-        return self.__items[0]
 
     # For a Queue, this should "dequeue" an item from the Queue
     # and return it
     def remove(self):
-        value = self.__items[0]
-        self.__items = self.__items[1:self.__length]
-        self.__length -= 1
+        value = self.__items[0] #Store value of element being remvoed
+        self.__items = self.__items[1:self.__length] #Shift or create new array, don't include first element
+        self.__length -= 1 #Decrement the length
         
         return value
         

@@ -32,42 +32,51 @@ class MazeSolver:
             return True
 
     def solve(self):
-        
+        #add starting point to stack
         self.ss.add(self.maze.start)
         
         while not self.ss.isEmpty():
             
+            #retrieve the next node to check
             current = self.ss.current()
             
+            #mark the new node as visited
             self.maze.contents[current.getRow()][current.getCol()].visit()
+
+            #remove the node visited from stack or queue
             self.ss.remove()
 
+            #once goal is found, terminate the function
             if current == self.maze.goal:
                 return 
             else: 
-                if (self.tileIsVisitable(current.getRow() - 1, current.getCol())):
-                    self.maze.contents[current.getRow() - 1][current.getCol()].setPrevious(current)
-                    self.ss.add(self.maze.contents[current.getRow() - 1][current.getCol()])
+                if (self.tileIsVisitable(current.getRow() - 1, current.getCol())): #NORTH
+                    self.maze.contents[current.getRow() - 1][current.getCol()].setPrevious(current) #Set previous to current
+                    self.ss.add(self.maze.contents[current.getRow() - 1][current.getCol()]) #Insert into stack if visitable
 
-                if (self.tileIsVisitable(current.getRow() + 1, current.getCol())):
+                if (self.tileIsVisitable(current.getRow() + 1, current.getCol())): #SOUTH
                     self.maze.contents[current.getRow() + 1][current.getCol()].setPrevious(current)
                     self.ss.add(self.maze.contents[current.getRow() + 1][current.getCol()])
 
-                if (self.tileIsVisitable(current.getRow(), current.getCol() + 1)):
+                if (self.tileIsVisitable(current.getRow(), current.getCol() + 1)): #EAST
                     self.maze.contents[current.getRow()][current.getCol() + 1].setPrevious(current)
                     self.ss.add(self.maze.contents[current.getRow()][current.getCol() + 1])
 
-                if (self.tileIsVisitable(current.getRow(), current.getCol() - 1)):
+                if (self.tileIsVisitable(current.getRow(), current.getCol() - 1)): #WEST
                     self.maze.contents[current.getRow()][current.getCol() - 1].setPrevious(current)
                     self.ss.add(self.maze.contents[current.getRow()][current.getCol() - 1])
-        return None
+        return #end function once all nodes have been visited - no path was found/formed
 
     def getPath(self):
+        #empty array to hold the path
         array = []
+        #starting from the end, make way back to start
         goalX = self.maze.goal.getRow()
         goalY = self.maze.goal.getCol()
         current = self.maze.contents[goalX][goalY]
 
+        #keep adding previous value until you hit none
+        #meaning that its the end of the path 
         while (current != None):
             array.insert(0,current)
             current = current.getPrevious()
