@@ -28,14 +28,11 @@ class MazeSolver:
         
         while not self.ss.isEmpty():
             
-            #retrieve the next node to check
-            current = self.ss.current()
+            #retrieve the next node to check and also remove it
+            current = self.ss.remove()
             
             #mark the new node as visited
             self.maze.contents[current.getRow()][current.getCol()].visit()
-
-            #remove the node visited from stack or queue
-            self.ss.remove()
 
             #once goal is found, terminate the function
             if current == self.maze.goal:

@@ -17,9 +17,6 @@ class Stack():
         self.__items += [item] #insert to end of array
         self.__length += 1
     
-    def current(self): #return most recent pushed element
-        return self.__items[self.__length - 1]
-
     # For a Stack, this should "pop" an item from the Stack
     # and return it
     def remove(self):
@@ -38,9 +35,6 @@ class Queue():
     # Returns True if the Queue is empty, or False if it is not empty
     def isEmpty(self):
         return self.__length == 0
-
-    def current(self):
-        return self.__items[0] #return first element in array
 
     # For a Queue, this should "enqueue" item to the end of the Queue
     def add(self, item):
@@ -66,6 +60,6 @@ if __name__ == '__main__':
     # Remove items from the queue
     while not q.isEmpty():
         items_removed.append(q.remove())
-
+        
     print(items_removed)
     pass
