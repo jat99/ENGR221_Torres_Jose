@@ -56,17 +56,15 @@ class MazeSolver:
         return #end function once all nodes have been visited - no path was found/formed
 
     def getPath(self):
-        #empty array to hold the path
-        array = []
-        #starting from the end, make way back to start
-        goalX = self.maze.goal.getRow()
-        goalY = self.maze.goal.getCol()
-        current = self.maze.contents[goalX][goalY]
+        
+        current = self.maze.goal
 
-        #keep adding previous value until you hit none
-        #meaning that its the end of the path 
+        if current.getPrevious() == None: return []
+
+        array = []
+
         while (current != None):
-            array.insert(0,current)
+            array.append(current)
             current = current.getPrevious()
 
         return array 
@@ -77,6 +75,7 @@ class MazeSolver:
     def printSolution(self):
         # Get the solution for the maze from the maze itself
         solution = self.getPath()
+        
         # A list of strings representing the maze
         output_string = self.maze.makeMazeBase()
         # For all of the tiles that are part of the path, 
@@ -95,10 +94,16 @@ class MazeSolver:
 
 if __name__ == "__main__":
     # The maze to solve
-    maze = Maze(["____",
-                 "S##G",
-                 "__#_",
-                 "____"])
+    maze = Maze(["##____#_##",
+                 "#____##__#",
+                 "_S#_______",
+                 "__##_____#",
+                 "____####__",
+                 "#____##___",
+                 "#__##___#_",
+                 "___##___##",
+                 "#___#__G__",
+                 "_______###"])
     # Initialize the MazeSolver to be solved with a Stack
     solver = MazeSolver(maze, Stack)
 
