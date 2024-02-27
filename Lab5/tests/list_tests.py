@@ -1,7 +1,7 @@
 import pytest
 
-from ..doublyLinkedList import DoublyLinkedList
-from ..doubleNode import DoubleNode
+from doublyLinkedList import DoublyLinkedList
+from doubleNode import DoubleNode
 
 @pytest.fixture 
 # Define an empty DoublyLinkedList for testing
@@ -53,8 +53,7 @@ def test_dll_first(nonemptyList):
 def test_dll_setfirstnode(nonemptyList):
     # Create a new node
     dn = DoubleNode(4)
-    print(dn)
-    # Set the new node as the first node of the list
+    # Set dthe new node as the first node of the list
     nonemptyList.setFirstNode(dn)
     # Check that getFirstNode returns the newly set first node
     assert nonemptyList.getFirstNode() == dn

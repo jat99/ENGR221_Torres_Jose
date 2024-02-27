@@ -1,5 +1,8 @@
 """
-WRITE YOUR PROGRAM HEADER HERE
+Author: Jose Torres
+File name: deque.py
+Description: Implementation of Deque data structure with a doubly linked list
+Date: 2/27/2024
 """
 
 from doublyLinkedList import DoublyLinkedList

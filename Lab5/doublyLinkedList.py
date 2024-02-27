@@ -30,9 +30,14 @@ class DoublyLinkedList():
         return self.__lastNode
     
     def setFirstNode(self, node):
+        if type(node) != DoubleNode and node != None:
+            raise Exception("Error: Input must be a valid DoubleNode or None")
+         
         self.__firstNode = node 
 
     def setLastNode(self, node):
+        if type(node) != DoubleNode and node != None:
+            raise Exception("Error: Input must be a valid DoubleNode or None")
         self.__lastNode = node 
 
     def find(self, value):
@@ -50,6 +55,7 @@ class DoublyLinkedList():
     def insertFront(self, value):
        if self.isEmpty():
             node = DoubleNode(value, self.getFirstNode(),self.getLastNode())
+            print(type(node))
             self.setFirstNode(node)
             self.setLastNode(node)
        else:
