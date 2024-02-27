@@ -12,7 +12,7 @@ class MazeSolver:
     # Inputs:
     #   maze: The maze to solve (Maze)
     #   searchStructure: The search structure class to use (Stack or Queue)
-    def __)init__(self, maze, searchStructure):
+    def __init__(self, maze, searchStructure):
         self.maze = maze             # The maze to solve
         self.ss = searchStructure()  # Initialize a searchStructure object
 
