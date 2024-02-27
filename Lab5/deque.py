@@ -2,7 +2,7 @@
 WRITE YOUR PROGRAM HEADER HERE
 """
 
-from .doublyLinkedList import DoublyLinkedList
+from doublyLinkedList import DoublyLinkedList
 
 class Deque():
     def __init__(self):

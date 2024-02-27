@@ -94,11 +94,18 @@ class LinkedList():
         # If we try to delete from an empty list, raise an exception
         if self.isEmpty():
             raise Exception("Error: Cannot delete from empty list")
+        
         # Otherwise, traverse down the list starting with the first node
         previous = self.getFirstNode()
+                #delete first node
+        if value == previous.getValue():
+            self.setFirstNode(previous.getNextNode())
+            return True
+        
         while previous.getNextNode() != None:
             # Get the next node in the list
             next = previous.getNextNode() 
+            
             # Check whether we want to delete the next node
             if value == next.getValue():
                 # If so, change the next node of the previous node
@@ -159,4 +166,15 @@ class LinkedList():
         return out + "]"
     
 if __name__ == "__main__":
+  
+    ll = LinkedList()
+    ll.insert(1)
+    ll.insert(2)
+    ll.insert(3)
+    print(ll.getFirstNode())
+    ll.insertAfter(4,1)
+    print(ll.getFirstNode())
+    
+    #ll.traverse()
+   
     pass

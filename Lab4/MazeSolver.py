@@ -1,6 +1,9 @@
+"""Author: Jose Torres
+File name: MazeSolver.py
+Description: Solved a maze using DFS(stack) and BFS(queue)
+Date: 2/27/2024
 """
-WRITE YOUR PROGRAM HEADER HERE
-"""
+
 from SearchStructures import Stack, Queue
 from Maze import Maze
 
@@ -9,7 +12,7 @@ class MazeSolver:
     # Inputs:
     #   maze: The maze to solve (Maze)
     #   searchStructure: The search structure class to use (Stack or Queue)
-    def __init__(self, maze, searchStructure):
+    def __)init__(self, maze, searchStructure):
         self.maze = maze             # The maze to solve
         self.ss = searchStructure()  # Initialize a searchStructure object
 

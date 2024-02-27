@@ -1,5 +1,8 @@
 """
-WRITE YOUR PROGRAM HEADER HERE
+Author: Jose Torres
+File name: SearchStructures.py
+Description: Custom Implemenation of Stack and Queue Data Structure
+Date: 2/27/2024
 """
 
 # Implementation of a Stack

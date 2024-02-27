@@ -1,5 +1,8 @@
 """
-WRITE YOUR PROGRAM HEADER HERE
+Author: Jose Torres
+File name: doubleNode.py
+Description: Custom Implementation of Doubly Node
+Date: 2/27/2024
 """
 
 class DoubleNode():
@@ -14,36 +17,38 @@ class DoubleNode():
     #####
         
     def isFirst(self) -> bool:
-        pass
+        return self.__previousNode == None
         
     def isLast(self) -> bool:
-        pass
+        return self.__nextNode == None
 
     #####
     # Getters
     #####
 
     def getValue(self):
-        pass
+        return self.__value
     
     def getNextNode(self):
-        pass
+        return self.__nextNode
 
     def getPreviousNode(self):
-        pass
+        return self.__previousNode
 
     #####
     # Setters
     #####
 
     def setValue(self, new_value) -> None:
-        pass
+        self.__value = new_value
 
     def setNextNode(self, new_next) -> None:
-        pass
+        if self.__checkValidNode(new_next):
+            self.__nextNode = new_next
 
     def setPreviousNode(self, new_previous) -> None:
-        pass
+        if self.__checkValidNode(new_previous):
+            self.__previousNode = new_previous
 
     #####
     # Helpers
@@ -55,7 +60,7 @@ class DoubleNode():
         return True
     
     def __str__(self):
-        pass
+        return str(self.getValue())
 
 if __name__ == "__main__":
     pass
