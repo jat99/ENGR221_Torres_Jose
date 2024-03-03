@@ -53,13 +53,12 @@ class DoublyLinkedList():
         return None
 
     def insertFront(self, value):
+       node = DoubleNode(value)
        if self.isEmpty():
-            node = DoubleNode(value, self.getFirstNode(),self.getLastNode())
-            print(type(node))
             self.setFirstNode(node)
             self.setLastNode(node)
        else:
-           node = DoubleNode(value, self.getFirstNode(), None)
+           node.setNextNode(self.getFirstNode())
            self.getFirstNode().setPreviousNode(node)
            self.setFirstNode(node)    
 
@@ -86,14 +85,14 @@ class DoublyLinkedList():
         return None
 
     def insertAfter(self, value_to_add, after_value) -> None:
-        node = self.find(after_value)
+        node = self.find(after_value) #Retrun node that we want to insert after
 
         if node == None:
             return False
-    
 
         next = node.getNextNode()
-        if next == None:
+
+        if next == None: 
             newNode = DoubleNode(value_to_add, next, node)
             node.setNextNode(newNode)
             self.setLastNode(newNode)
@@ -108,7 +107,6 @@ class DoublyLinkedList():
     def deleteFirstNode(self):
         if self.isEmpty():
             raise Exception("Error: List is empty")
-        
         
         first = self.getFirstNode()
 
@@ -128,7 +126,7 @@ class DoublyLinkedList():
        
        last = self.getLastNode()
 
-       if last.isFirst():
+       if last.isFirst(): #Check if it is also the first item
            self.setFirstNode(None)
            self.setLastNode(None)
            return last.getValue()
@@ -139,14 +137,13 @@ class DoublyLinkedList():
        return last.getValue()
     
     def deleteValue(self, value):
-        if self.isEmpty():
+        if self.isEmpty(): #Check List is not empty
             raise Exception("Error: Cannont delete from empty list")
         previous = self.getFirstNode()
-
-
         while previous.getNextNode() != None:
-            next = previous.getNextNode()
+            next = previous.getNextNode() 
             if value == next.getValue():
+                #To remove a node, make sure previous and next nodes point to eachother
                 next.getNextNode().setPreviousNode(previous)
                 previous.setNextNode(next.getNextNode())
 
@@ -165,16 +162,16 @@ class DoublyLinkedList():
             node = node.getNextNode()
 
     def reverseTraverse(self):
-        # Traverse starting from the first node
+        # Traverse starting from the last node
         node = self.getLastNode()
         # Stop when we reach the end of the list
         while node != None:
             # Print the value of this node
             print(node.getValue())
-            # Update node to be the next node
+            # Update node to be the previous node
             node = node.getPreviousNode()
 
-    def __len__(self):
+    def __len__(self): #This function can work with forward or reverse traverse
         # A counter starting at 0
         l = 0
         # Traverse down the list starting with the first node
@@ -197,7 +194,7 @@ class DoublyLinkedList():
         while node != None:
             # Only add the arrow if there's more than one value in the list
             if len(out) > 1:
-                out += " <-> "
+                out += " <-> " #Since it is Doubly, it should have two arrows
             # Add the value of the current node to the string
             out += str(node)
             # Update node to be the next node
@@ -207,18 +204,4 @@ class DoublyLinkedList():
     
     
 if __name__ == "__main__":
-    dll = DoublyLinkedList()
-    dll.insertFront(1)
-    dll.insertFront(2)
-    dll.insertFront(3)
-
-    dn = DoubleNode(4)
-    print(dn)
-    # Set the new node as the first node of the list
-    
-    dll.setFirstNode(dn)
-
-    dll.forwardTraverse()
-    # print(" ")
-    # dll.reverseTraverse()
     pass

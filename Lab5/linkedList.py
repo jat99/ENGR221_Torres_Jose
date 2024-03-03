@@ -166,15 +166,4 @@ class LinkedList():
         return out + "]"
     
 if __name__ == "__main__":
-  
-    ll = LinkedList()
-    ll.insert(1)
-    ll.insert(2)
-    ll.insert(3)
-    print(ll.getFirstNode())
-    ll.insertAfter(4,1)
-    print(ll.getFirstNode())
-    
-    #ll.traverse()
-   
     pass
