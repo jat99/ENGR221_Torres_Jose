@@ -87,20 +87,14 @@ class DoublyLinkedList():
     def insertAfter(self, value_to_add, after_value) -> None:
         node = self.find(after_value) #Retrun node that we want to insert after
 
-        if node == None:
-            return False
+        if node == None: return False
 
         next = node.getNextNode()
+        newNode = DoubleNode(value_to_add, next, node)
+        node.setNextNode(newNode)
 
-        if next == None: 
-            newNode = DoubleNode(value_to_add, next, node)
-            node.setNextNode(newNode)
-            self.setLastNode(newNode)
-          
-        else:
-            newNode = DoubleNode(value_to_add, next, node)
-            next.setPreviousNode(newNode)
-            node.setNextNode(newNode)
+        if next == None: self.setLastNode(newNode)
+        else: next.setPreviousNode(newNode)
    
         return True
 
