@@ -1,7 +1,8 @@
 """
-WRITE YOUR PROGRAM HEADER HERE
-
-Assignment adapted from HMC CS5
+Name: Jose Torres
+File name: randomWalker.py
+Description: This program replicates a random walker using a loop over recursion.
+Date: 3/4/2024
 """
 
 import random  
@@ -55,7 +56,20 @@ def rwsteps(start, low, hi):
         return 1 + rwsteps(newstart, low, hi)  # counts one step, recurses for the rest!
 
 def rwstepsLoop(start, low, hi):
-    pass
+    steps = 0
+    #To get the same behavior as the recursion we have to do almost like a do while loop, 
+    #Even if the start is out of bounds we want to print out the first line.
+    while (True): #Run until a case inside loop is met. 
+        walkway = "_"*(hi-low)
+        S = (start - low)
+        walkway = walkway[:S] + "S" + walkway[S:]
+        walkway = " " + walkway + " "
+        print(walkway, "    ", start, low, hi)
+        if start <= low or start >= hi:#Once this is true break out of the loop
+           break
+        start = start + rs()
+        steps +=1
+    return steps
 
 if __name__ == '__main__':
-    print(rs())
+    print("Steps: ", rwstepsLoop(0,0,20))

@@ -20,5 +20,5 @@ def test_rwstepsLoop(capfd):
     # Split the string into a list, separated by newlines
     out_lines = out.split('\n')
     # Check that the last printed line is formatted as expected
-    assert out_lines[-2] in [' __________S        10 0 10', 
-                             ' S__________        0 0 10']
+    assert out_lines[-2] in [' __________S       10 0 10', 
+                             ' S__________       0 0 10']
