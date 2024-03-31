@@ -14,6 +14,7 @@ def insertionSort(list_to_sort: list) -> list:
         #checek j in bounds and the previous element is smaller than currrent
         while j > 0 and list_to_sort[j-1] > list_to_sort[j]: 
             swap(list_to_sort, j, j-1)
+            j-=1
     return list_to_sort
 
 # Second Implementation of insertion sort using shift
@@ -65,7 +66,6 @@ def merge(left_array: list, right_array: list):
         j+=1
   
     return array
-
 
 def mergeSort(array: list):
     if len(array) < 2:
@@ -130,6 +130,6 @@ def test(A):
 if __name__ == '__main__':
     A = [2,1,7,9,4]
     print(A)
-    test(A)
-    print(A)
+    print(insertionSort(A))
+
 pass

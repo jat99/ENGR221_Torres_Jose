@@ -72,4 +72,5 @@ def rwstepsLoop(start, low, hi):
     return steps
 
 if __name__ == '__main__':
-    print("Steps: ", rwstepsLoop(0,0,20))
+    #rwpos()
+    print("Steps: ", rwstepsLoop(5,0,10))
