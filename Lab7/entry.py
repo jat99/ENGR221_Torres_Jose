@@ -3,6 +3,9 @@ class Entry():
         self.__nickname = nickname
         self.__species = species
 
+    def getSpecies(self):
+        return self.__species
+    
     def __str__(self):
         return "Nickname: {}, Species: {}".format(self.__nickname, self.__species)
     

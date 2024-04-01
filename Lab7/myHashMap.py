@@ -45,7 +45,7 @@ class MyHashMap:
 
         keyHash = self.hashKey(key)
         if len(self.buckets[keyHash]) == 0:
-            entry = MyHashMap.MyHashMapEntry(key, value)
+            entry = self.MyHashMapEntry(key, value)
             self.buckets[keyHash].append(entry)  
             self.size+=1
             return True
@@ -61,7 +61,7 @@ class MyHashMap:
     def replace(self, key, newValue):
         if type(key) == type(None):
             raise Exception("Error: The key is invalid")
-        entry = MyHashMap.MyHashMapEntry(key, newValue)
+        entry = self.MyHashMapEntry(key, newValue)
         self.buckets[self.hashKey(key)][0] = entry
         return True
 
@@ -73,7 +73,8 @@ class MyHashMap:
         if type(key) == type(None): 
             raise Exception("Error: The key is invalid")
         self.buckets[self.hashKey(key)] = []
-        self.size-=1
+        self.size -=1
+        print("hello")
         return True
 
     """
@@ -158,7 +159,7 @@ if __name__ == "__main__":
 
     #print("Is Hash Map Empty?", myHashMap.isEmpty())
 
-    myHashMap.put(entry1, entry1.getValue())
+    myHashMap.put(entry1.getKey(), entry1.getValue())
     myHashMap.put(entry2.getKey(), entry2.getValue())
     myHashMap.put(entry3.getKey(), entry3.getValue())
     myHashMap.put(entry4.getKey(), entry4.getValue())

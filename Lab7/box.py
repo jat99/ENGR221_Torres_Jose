@@ -2,9 +2,10 @@ from myHashMap import MyHashMap
 from entry import Entry
 
 class Box:
-    def __init__(self):
+    def __init__(self, empty: bool = False):
         self.nicknameMap = MyHashMap()
-        self.populateBox()
+        if not empty:
+            self.populateBox()
 
     """
     Adds Entries to the Box from inputFile. Assume that each
@@ -27,7 +28,8 @@ class Box:
     Returns true if the Entry is successfully added to the Box, and
     false if the nickname already exists in the Box. """
     def add(self, nickname, species):
-       return self.nicknameMap.put(nickname, species) 
+       entry = Entry(nickname, species)
+       return self.nicknameMap.put(nickname, entry) 
 
     """
     Return a single Entry object with the given nickname and species.
@@ -35,7 +37,7 @@ class Box:
     Return None if the Entry does not exist in the Box. """
     def find(self, nickname, species):
         entry = self.nicknameMap.get(nickname)
-        if entry.getValue() ==  species:
+        if entry.getValue().getSpecies() ==  species:
             return entry
         return None
 
@@ -77,8 +79,9 @@ class Box:
 
 if __name__ == '__main__':
     b = Box()
-    print(b.nicknameMap.size)
-    print(b.findAllNicknames()) 
-    print(b.removeEntry("Sparky", "Pikachu"))
-    print(b.nicknameMap.size)
-    print(b.findAllNicknames()) 
+
+    for key in b.findAllNicknames():
+        print(b.findEntryByNickname(key).getValue())
+    
+    print(b.findAllNicknames())
+    print("Looking for Sparky's Species: ", b.findEntryByNickname("Sparky").getValue().getSpecies())
