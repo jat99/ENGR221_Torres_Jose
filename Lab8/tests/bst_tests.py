@@ -101,6 +101,33 @@ def test_bst_findSuccessor(nonemptyTree):
     # Should return smallest value in tree (1)
     assert nonemptyTree.findSuccessor(nonemptyTree.getRoot().right).key == 8
 
+###
+# findPredecessor
+## 
+
+#Custom Tests
+
+@pytest.mark.findPredecessor
+
+def test_bst_findPredecessor(nonEmptyTree):
+    assert nonEmptyTree.findPredecessor(nonEmptyTree.getRoot().left).key == 3
+
+###
+# find max
+## 
+
+@pytest.mark.findMax
+def test_bst_findMax(nonEmptyTree):
+    assert nonEmptyTree.findMax(nonEmptyTree.getRoot()).key == 8
+
+###
+# find min
+## 
+
+@pytest.mark.findMin
+def test_bst_findMin(nonEmptyTree):
+    assert nonEmptyTree.findMin(nonEmptyTree.getRoot()).key == 1
+
 ####
 # delete
 ####
