@@ -99,7 +99,7 @@ def test_bst_lookup_present(nonemptyTree):
 # findSuccessor functionality for a BST
 def test_bst_findSuccessor(nonemptyTree):
     # Should return smallest value in tree (1)
-    assert nonemptyTree.findSuccessor(nonemptyTree.getRoot()).key == 1
+    assert nonemptyTree.findSuccessor(nonemptyTree.getRoot().right).key == 8
 
 ####
 # delete

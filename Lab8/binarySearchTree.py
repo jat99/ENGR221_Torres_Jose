@@ -39,24 +39,28 @@ class BinarySearchTree:
         return node
 
     def isEmpty(self):
-        """ ISEMPTY DOCUMENTATION HERE """
-        pass
+        return self.__root == None
     
     def getRoot(self):
-        """ GETROOT DOCUMENTATION HERE """
-        pass
+        return self.__root
 
     def search(self, goalKey):
         """ SEARCH DOCUMENTATION HERE """
         return self.__searchHelp(self.__root, goalKey)
 
     def __searchHelp(self, node, goalKey):
-        """ __SEARCHHELP DOCUMENTATION HERE """
-        pass
+        if node == None:
+            return None
+        if node.key == goalKey:
+            return node
+        if node.key < goalKey:
+            return self.__searchHelp(node.right, goalKey)
+        if node.key > goalKey:
+            return self.__searchHelp(node.left, goalKey)
 
     def lookup(self, goal):
         """ LOOKUP DOCUMENTATION HERE """
-        pass
+        return self.search(goal).value
 
     def findSuccessor(self, subtreeRoot):
         """ FINDSUCCESSOR DOCUMENTATION HERE """
@@ -64,25 +68,76 @@ class BinarySearchTree:
     
     def __findSuccessorHelp(self, node):
         """ __FINDSUCCESSOR DOCUMENTATION HERE """
-        pass
+        if node.left == None:
+            return node 
+        return self.__findSuccessorHelp(node.left)
+        
     
     def delete(self, deleteKey):
         """ DELETE DOCUMENTATION HERE """
         if self.search(deleteKey):
-            return self.__deleteHelp(self.__root, deleteKey)
-        raise Exception("Key not in tree.")
+            self.__root = self.__deleteHelp(self.__root, deleteKey)
+        else:
+            raise Exception("Key not in tree.")
     
-    def __deleteHelp(self, node, deleteKey):
+    def test(self, key):
+        self.__root = self.delete(key)
+    
+    def __deleteHelp(self, node, deleteKey): #return the node that is getting deleted
         """ __DELETEHELP DOCUMENTATION HERE """
-        pass
+        # 3 cases: 0, 1 or 2 children
+        if node == None: 
+            node = None
+        elif deleteKey < node.key:
+            node.left = self.__deleteHelp(node.left,deleteKey)
+        elif deleteKey > node.key:
+            node.right = self.__deleteHelp(node.right,deleteKey)
+        else:
+            if (node.left == None and node.right == None): 
+                node = None
+            elif (node.left == None): 
+                node =  node.right
+            elif (node.right == None):
+                node = node.left
+            else:
+                tempNode = self.findSuccessor(node.right)
+                node.key = tempNode.key
+                node.value = tempNode.value
+                node.right = self.__deleteHelp(node.right, tempNode.key)
+                #Search for
+        return node
+        # if node == None: return None
+        # if node.key < deleteKey:
+        #     node.right = self.__deleteHelp(node.right, deleteKey)
+        # if node.key > deleteKey:
+        #     node.left = self.__deleteHelp(node.left, deleteKey)
+        # if node.left == None and node.right == None: #no children
+        #     return None
+        # elif node.left == None or node.right == None: #one child
+        #     if node.left:
+        #         return node.left
+        #     if node.right:
+        #         return node.right
+        # else: #two children
+        #     newNode = self.findSuccessor(node)
+        #     node.key = newNode.key
+        #     node.value = newNode.value
+        #     node.right = self.__deleteHelp(node.right, node.value)
+        #     return node.right
+        # return node
+
 
     def traverse(self) -> None:
         """ TRAVERSE DOCUMENTATION HERE """
+        # BFS vs DFS
         self.__traverseHelp(self.__root)
 
     def __traverseHelp(self, node) -> None:
         """ __TRAVERSEHELP DOCUMENTATION HERE """
-        pass
+        if type(node) == self.__Node:
+            self.__traverseHelp(node.left)
+            print(node)
+            self.__traverseHelp(node.right)
 
     def __str__(self) -> str:
         """ Represent the tree as a string. Formats as 
@@ -126,6 +181,33 @@ class BinarySearchTree:
             """ Represent the node as a string.
                 Formats as "{key, value}" """
             return "({}, {})".format(self.key, self.value)
-        
+
+class Nodes:
+   def __init__(self):  
+       print("initialize")
+
 if __name__ == "__main__":
-    pass
+    bst = BinarySearchTree()
+    #bst.insert(5, 5)
+    bst.insert(5, 5)
+    bst.insert(8, 8)
+    bst.insert(3,3)
+    bst.insert(1,1)
+    #bst.insert(8,8)
+    # print("successor")
+    # print(bst.findSuccessor(bst.getRoot()))
+    # #bst.delete(5)
+    # bst.traverse()
+    # print("-----------------")
+    #bst.delete(5)
+    print("root", bst.getRoot())
+   #bst.test(5)
+    print("root", bst.getRoot())
+    #bst.test(8)
+    print("root", bst.getRoot().left)
+    bst.delete(1)
+    # print(bst.getRoot().left)
+    print("------------------")
+    bst.traverse()
+
+
