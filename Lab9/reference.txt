@@ -1,0 +1,44 @@
+FILENAME: boardCell.py
+- Store information of cell on board 
+    - row, col, type (enum)
+    - parent 
+    - check if cell has been queued 
+- Change type 
+    - Can become wall, food, empty, etc ..
+- Set its parent
+- Type 
+    - wall, empty, food, head, body 
+
+FILENAME: boardDisplay.py
+
+- Functions
+    - displayGameOver
+        - places game over in this case on top of board 
+        - render()
+            - 
+    - drawImage()
+        - parameters: row, col and image
+        - places image on display based on row and col positions
+        - convert_alpha() 
+            - 
+        - get_rect()
+            -
+        - blit()
+    - drawSquare()
+        - draws color of cell or places head image
+
+FILENAME: controller.py
+- Variables
+    - Game Data 
+    - Display 
+    - 
+
+FILENAME: gameData.py
+- Variables
+    - Cells that are food
+    - Cells that are snake
+    - GameOver State
+    - Height and width of board
+    - Board information (2D)
+
+
