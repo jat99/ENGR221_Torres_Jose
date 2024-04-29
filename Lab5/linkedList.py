@@ -145,6 +145,37 @@ class LinkedList():
         # Return the counter
         return l 
     
+    def mergeLists(self, head1, head2):
+        newHead = LinkedList()
+        while (1):
+            if head1 is None or head2 is None:
+                break
+            print("test")
+            if head1.getValue() <= head2.getValue():
+                print("inserting " + str(head1.getValue()))
+                newHead.insert(head1)
+                head1 = head1.getNextNode()
+                print(head1)
+            else:
+               # print("inserting " + str(head2.getValue()))
+                newHead.insert(head2)
+                head2 = head2.getNextNode()
+
+        print("exit")
+    
+        if head1 is None:
+            while head2 is not None:
+                print("inserting " + str(head2.getValue()))
+                newHead.insert(head2)
+                head2 = head2.getNextNode()
+        if head2 is None:
+            while head1 is not None:
+                print("inserting " + str(head1.getValue()))
+                newHead.insert(head1)
+                head1 = head1.getNextNode()
+        return newHead
+        
+    
     # This overloads the built in __str__ method and will be 
     # run when printing a linked list (e.g., print(linkedList)).
     # Outputs the list in format "[val1 > val2 > ... > valn]"
@@ -166,4 +197,17 @@ class LinkedList():
         return out + "]"
     
 if __name__ == "__main__":
-    pass
+    ll = LinkedList()
+    ll.insert(40)
+    ll.insert(33)
+    ll.insert(17)
+    ll.insert(1)
+
+    nn = LinkedList()
+    nn.insert(20)
+    nn.insert(6)
+    nn.insert(5)
+    print(ll)
+    print(nn)
+
+    print(nn.mergeLists(ll.getFirstNode(),nn.getFirstNode()))

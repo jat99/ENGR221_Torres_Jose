@@ -198,4 +198,16 @@ class DoublyLinkedList():
     
     
 if __name__ == "__main__":
-    pass
+
+    dLL = DoublyLinkedList()
+
+    dLL.insertFront(1)
+    dLL.insertFront(2)
+    dLL.insertBack(3)
+    dLL.insertBack(4)
+    dLL.deleteFirstNode()
+    dLL.insertFront(5)
+    dLL.deleteLastNode()
+    print(dLL)
+
+    

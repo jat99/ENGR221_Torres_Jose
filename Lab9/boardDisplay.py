@@ -17,8 +17,7 @@ class BoardDisplay:
     def updateGraphics(self, gameData):
         """ Re-draws the board, food, and snake based
             on the current state of the board """
-        
-        # Clear the board
+
         self.clear()
 
         # Draw the board 2D 
@@ -29,6 +28,9 @@ class BoardDisplay:
         # Draw the game over message, if appropriate
         if gameData.getGameOver():
             self.displayGameOver()
+        else: 
+            #self.displayTopScores()
+            self.displayLiveScore(gameData.getSnakeCellLength())
 
         # Update the display
         pygame.display.update()
@@ -83,3 +85,30 @@ class BoardDisplay:
         textRect.center = (Preferences.GAME_OVER_X, Preferences.GAME_OVER_Y)
         # Place the game over text on the display
         self.__display.blit(text, textRect)
+
+    def displayLiveScore(self, snakeCellsLength):
+        font = Preferences.LIVE_SCORE_FONT
+        stringT = "Score: " + str(snakeCellsLength - 1)
+        text = font.render(stringT, True, Preferences.LIVE_SCORE_COLOR)
+        textRect = text.get_rect()
+        textRect.center = (Preferences.LIVE_SCORE_X, Preferences.LIVE_SCORE_Y)
+        self.__display.blit(text, textRect)
+
+    # def displayTopScores(self):
+    #     font = Preferences.LIVE_SCORE_FONT
+
+    #     print(len(self.__topScores))
+
+    #     stringT = "1:" + str(self.__topScores[0])
+    #     for num in range(1,3):
+    #         stringT+= str(num+1) + ":" + str(self.__topScores[num])
+    #         print(num)
+
+    #     # stringT = str(index + 1) + " Place: " + str(score)
+
+    #     text = font.render(stringT, True, Preferences.LIVE_SCORE_COLOR)
+    #     textRect = text.get_rect()
+    #     textRect.center = (Preferences.LIVE_SCORE_X - 150, Preferences.LIVE_SCORE_Y)
+    #     self.__display.blit(text, textRect)
+
+

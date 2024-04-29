@@ -18,7 +18,7 @@ class Preferences:
     ##########
 
     # How frequently to move the snake
-    REFRESH_RATE = 2
+    REFRESH_RATE = 1
     # How frequently to add food to the board
     FOOD_ADD_RATE = 30
     # How long to sleep between updates
@@ -48,7 +48,7 @@ class Preferences:
     COLOR_FOOD = pygame.Color('firebrick')
     COLOR_EMPTY = pygame.Color('lavender')
     COLOR_HEAD = pygame.Color('darkorchid4')
-    COLOR_BODY = pygame.Color('darkorchid1')
+    COLOR_BODY = pygame.Color('darkgreen')
 
     ##########################
     # Game over text display #
@@ -59,6 +59,15 @@ class Preferences:
     GAME_OVER_COLOR = pygame.Color('navy')
     GAME_OVER_FONT = pygame.font.SysFont("arial", 80)
     GAME_OVER_TEXT = "Game Over"
+
+    ##########################
+    # Live score text display #
+    ##########################
+
+    LIVE_SCORE_X = GAME_BOARD_HEIGHT / 2 + 400
+    LIVE_SCORE_Y = GAME_BOARD_WIDTH / 2 + 50
+    LIVE_SCORE_COLOR = pygame.Color('black')
+    LIVE_SCORE_FONT = pygame.font.SysFont("arial", 25)
 
     ######################
     # Graphics and Audio #

@@ -21,6 +21,8 @@ class Controller():
         # How many frames have passed
         self.__numCycles = 0
 
+        self.__currentPlayerName = ""
+
         # Attempt to load any sounds and images
         try:
             pygame.mixer.init()
@@ -31,11 +33,14 @@ class Controller():
             self.__audioEat = None
 
         # Initialize the board for a new game
+        self.__data.getTopScores()
+        self.__data.createCurrentPlayer()
+        
         self.startNewGame()
         
     def startNewGame(self):
         """ Initializes the board for a new game """
-
+        #self.enter_name()
         # Place the snake on the board
         self.__data.placeSnakeAtStartLocation()
 
@@ -106,6 +111,10 @@ class Controller():
             # Find the next place the snake should move
             if self.__data.inAIMode():
                 nextCell = self.getNextCellFromBFS()
+                if nextCell.isWall() or nextCell.isBody():
+                    self.reverseSnake()
+                    nextCell = self.__data.getRandomNeighbor(self.__data.getSnakeHead())
+                    #find a way to exhaust snake
             else:
                 nextCell = self.__data.getNextCellInDir()
             try:
@@ -123,12 +132,8 @@ class Controller():
         elif nextCell.isFood():
             self.playSound_eat()
             self.__data.ateFood(nextCell)
-            # TODO Tell __data that we ate food!
         else:
             self.__data.moveSnake(nextCell)
-
-        # TODO Possibly add code here, using the helper methods
-        # in gameData.py under the "snake movement methods" header
 
     def updateFood(self):
         """ Add food every FOOD_ADD_RATE cycles or if there is no food """
@@ -151,31 +156,47 @@ class Controller():
         head.setAddedToSearchList()
         cellsToSearch.put(head)
 
-        # Search!
-        # TODO implement BFS here
+        while not cellsToSearch.empty():
+            current = cellsToSearch.get()
+            #if current is equal to a food cell 
+            
+            allNeighbors = self.__data.getNeighbors(current)
+                        
+            if current.isFood(): # Found Food
+                return self.getFirstCellInPath(current)
+            
+            for neighbor in allNeighbors:
+                if not neighbor.alreadyAddedToSearchList():
+                    if neighbor.isEmpty() or neighbor.isFood():
+                        neighbor.setParent(current)
+                        neighbor.setAddedToSearchList()
+                        cellsToSearch.put(neighbor)
 
-        # If the search failed, return a random neighbor
         return self.__data.getRandomNeighbor(head)
 
     def getFirstCellInPath(self, foodCell):
-        """ TODO COMMENT HERE """
-
-        # TODO
-        
+        while foodCell.getParent() is not None:
+            if foodCell.getParent() == self.__data.getSnakeHead():
+                break
+            foodCell = foodCell.getParent()
         return foodCell
+        # if foodCell.getParent() == self.__data.getSnakeHead():
+        #     return foodCell
+        
+        # return self.getFirstCellInPath(foodCell.getParent())
     
     def reverseSnake(self):
-        """ TODO COMMENT HERE """
-
-        # TODO
-
-        pass
+        self.__data.reverseTheSnake()
 
     def playSound_eat(self):
         """ Plays an eating sound """
         if self.__audioEat:
             pygame.mixer.Sound.play(self.__audioEat)
             pygame.mixer.music.stop()
+
+    def enter_name(self):
+        name = input("enter nickname: ")
+
 
     class Keypress(Enum):
         """ An enumeration (enum) defining the valid keyboard inputs 

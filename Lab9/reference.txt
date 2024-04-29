@@ -14,24 +14,20 @@ FILENAME: boardDisplay.py
 - Functions
     - displayGameOver
         - places game over in this case on top of board 
-        - render()
-            - 
+        - render
     - drawImage()
         - parameters: row, col and image
         - places image on display based on row and col positions
-        - convert_alpha() 
-            - 
-        - get_rect()
-            -
-        - blit()
-    - drawSquare()
+        - convert_alpha
+        - get_rect
+        - blit
+    - drawSquare
         - draws color of cell or places head image
 
 FILENAME: controller.py
 - Variables
     - Game Data 
     - Display 
-    - 
 
 FILENAME: gameData.py
 - Variables

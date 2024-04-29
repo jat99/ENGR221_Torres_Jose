@@ -7,6 +7,7 @@ Description: This file contains all information and status of game/snake
 from boardCell import BoardCell
 from preferences import Preferences
 
+from Player import Player
 import random
 from enum import Enum, auto
 
@@ -36,6 +37,63 @@ class GameData:
         # Whether or not the game is over
         self.__gameOver = False
 
+        # Top 3 Players 
+        self.__topPlayers = []
+
+        # Current Player
+        self.__currentPlayer = None
+
+        # Reverse Counter
+
+        self.reverseCounter = 0
+
+    ##########################
+    # Top Player Scores #
+    ##########################
+    def getTopScores(self):
+        filePath = "topScores.txt"
+        with open(filePath, "r") as f:
+            for line in f:
+                nickname, score = line.split()
+                topPlayer = Player(nickname,int(score))
+                self.__topPlayers.append(topPlayer)
+
+        self.displayLeaderBoard()
+
+    def displayLeaderBoard(self):
+        self.__topPlayers.sort(key=lambda x: x.score, reverse=True)
+        print("\n - LEADERBOARD - \n")
+        for player in self.__topPlayers:
+            print(player)
+        print("")
+    ##########################
+    # Create New Player #
+    ##########################
+    def createCurrentPlayer(self):
+        nickname = input("Enter nickname: ")
+        self.__currentPlayer = Player(nickname)
+
+    def updateTopScores(self):  
+        filePath = "topScores.txt"
+        topPlayersLength = len(self.__topPlayers)
+        self.__currentPlayer.score = self.getSnakeCellLength() - 1
+        if topPlayersLength < 3: # Just add current player score
+            with open(filePath, "a") as f:
+                f.write(str(self.__currentPlayer.nickname) + " " + str(self.__currentPlayer.score) + '\n')
+            self.__topPlayers.append(self.__currentPlayer)
+        elif self.__currentPlayer.score > self.__topPlayers[2].score:
+            with open(filePath, "w") as f:
+                f.write(str(self.__currentPlayer.nickname) + " " + str(self.__currentPlayer.score) + '\n')
+                f.write(str(self.__topPlayers[0].nickname) + " " + str(self.__topPlayers[0].score) + '\n')
+                f.write(str(self.__topPlayers[1].nickname) + " " + str(self.__topPlayers[1].score) + '\n')
+            self.__topPlayers[2] = self.__currentPlayer
+        if self.__currentPlayer.score == -1:
+            print("\nYour score (" + self.__currentPlayer.nickname + "): 0")
+        else: 
+            print("\nYour score (" + self.__currentPlayer.nickname + "): " + str(self.__currentPlayer.score))
+        
+        self.displayLeaderBoard()
+        
     ##########################
     # Initialization methods #
     ##########################
@@ -143,7 +201,6 @@ class GameData:
         cell.becomeHead()
         self.__snakeCells[0].becomeBody()
         self.__snakeCells.insert(0,cell)
-        #increase snake cells
     
     # Insert new node as head and delete tail node
     def moveSnake(self, cell):
@@ -153,6 +210,27 @@ class GameData:
         temp = self.__snakeCells.pop()
         temp.becomeEmpty()
 
+    def getSnakeCellLength(self):
+        return len(self.__snakeCells) - 1
+
+    def reverseTheSnake(self):
+        lp = 0
+        rp = len(self.__snakeCells) - 1
+        
+        while (lp < rp):
+            self.__snakeCells[lp], self.__snakeCells[rp] = self.__snakeCells[rp], self.__snakeCells[lp]
+            lp+=1
+            rp-=1
+
+        #self.__snakeCells[0], self.__snakeCells[-1] = self.__snakeCells[-1], self.__snakeCells[0]
+        if self.__currentMode == self.SnakeMode.GOING_NORTH:
+            self.setDirectionSouth()
+        elif self.__currentMode == self.SnakeMode.GOING_SOUTH:
+            self.setDirectionNorth()
+        elif self.__currentMode == self.SnakeMode.GOING_EAST:
+            self.setDirectionWest()
+        elif self.__currentMode == self.SnakeMode.GOING_WEST:
+            self.setDirectionEast()
     ###############################
     # Methods to access neighbors #
     ###############################
@@ -203,18 +281,18 @@ class GameData:
 
     def getNeighbors(self, center):
         """ Returns a set of the neighbors around the given cell """
-        return {self.getNorthNeighbor(center),
+        return [self.getNorthNeighbor(center),
                 self.getSouthNeighbor(center),
                 self.getEastNeighbor(center),
-                self.getWestNeighbor(center)}
+                self.getWestNeighbor(center)]
     
     def getRandomNeighbor(self, center):
         """ Returns a random empty neighbor of the given cell """
         neighbors = self.getNeighbors(center)
         for cell in neighbors:
-            if cell.isEmpty():
+            if cell.isEmpty() or cell.isFood():
                 return cell 
-        # If none of them are empty, just return the first one
+
         return random.choice(neighbors)
     
     ###################################
@@ -294,6 +372,7 @@ class GameData:
 
     def setGameOver(self):
         """ Set the game over flag to True """
+        self.updateTopScores()
         self.__gameOver = True 
 
     def getGameOver(self):
