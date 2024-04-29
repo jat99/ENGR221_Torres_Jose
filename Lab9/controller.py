@@ -111,10 +111,10 @@ class Controller():
             # Find the next place the snake should move
             if self.__data.inAIMode():
                 nextCell = self.getNextCellFromBFS()
+                # Reverse the Snake as last possible chance 
                 if nextCell.isWall() or nextCell.isBody():
                     self.reverseSnake()
                     nextCell = self.__data.getRandomNeighbor(self.__data.getSnakeHead())
-                    #find a way to exhaust snake
             else:
                 nextCell = self.__data.getNextCellInDir()
             try:
@@ -158,12 +158,12 @@ class Controller():
 
         while not cellsToSearch.empty():
             current = cellsToSearch.get()
-            #if current is equal to a food cell 
-            
-            allNeighbors = self.__data.getNeighbors(current)
                         
             if current.isFood(): # Found Food
                 return self.getFirstCellInPath(current)
+            
+            #Get all neighbors of the current cell
+            allNeighbors = self.__data.getNeighbors(current)
             
             for neighbor in allNeighbors:
                 if not neighbor.alreadyAddedToSearchList():
@@ -174,16 +174,12 @@ class Controller():
 
         return self.__data.getRandomNeighbor(head)
 
+    #Recursive function that returns cell that is afte the snake head
     def getFirstCellInPath(self, foodCell):
-        while foodCell.getParent() is not None:
-            if foodCell.getParent() == self.__data.getSnakeHead():
-                break
-            foodCell = foodCell.getParent()
-        return foodCell
-        # if foodCell.getParent() == self.__data.getSnakeHead():
-        #     return foodCell
+        if foodCell.getParent() == self.__data.getSnakeHead():
+            return foodCell
         
-        # return self.getFirstCellInPath(foodCell.getParent())
+        return self.getFirstCellInPath(foodCell.getParent())
     
     def reverseSnake(self):
         self.__data.reverseTheSnake()
